@@ -181,7 +181,7 @@ app.layout = html.Div(children=[
         dcc.Dropdown(
             id='figPV_dropdown',
             options=[{'label': i, 'value': i} for i in topics],
-            value='Bestrijding internationaal terrorisme',
+            value='Begrotingsstaten BZK',
             style={'height': 37}),
         dcc.Graph(id='fig_pv')],
         style={'width': '47%', 'marginTop': 25, 'marginLeft': '2%', 'display': 'inline-block',
