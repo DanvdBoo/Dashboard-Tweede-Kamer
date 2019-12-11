@@ -66,8 +66,8 @@ tdist = tdist.groupby('topic').sum().reset_index()
 
 fig_td = go.Figure(
     data=[
-        go.Bar(name='aangenomen', x=tdist['topic'], y=tdist['adopted'], base=0, marker_color='#87CE70'),
-        go.Bar(name='afgewezen', x=tdist['topic'], y=-tdist['rejected'], base=0, marker_color='#d36e70')
+        go.Bar(name='afgewezen', x=tdist['topic'], y=-tdist['rejected'], base=0, marker_color='#E0E7EA'),
+        go.Bar(name='aangenomen', x=tdist['topic'], y=tdist['adopted'], base=0, marker_color='#121469')
     ],
     layout=go.Layout(
         title=dict(text='Distributie per onderwerp', x=0.5),
@@ -105,9 +105,9 @@ for t in topics:
     fig_PVs[t] = go.Figure(
         data=[
             go.Bar(y=pvotes.columns, x=pvotes.loc[t, 'support'].values, name='Stemmen voor', orientation='h',
-                   marker_color='#A6C4FE'),
+                   marker_color='#121469'), #87cd70
             go.Bar(y=pvotes.columns, x=pvotes.loc[t, 'against'].values, name='Stemmen tegen', orientation='h',
-                   marker_color='#DDDDDD')],
+                   marker_color='#E0e7ea')],
         layout=go.Layout(
             title=dict(text='Stemresultaten met bettrekking tot ' + str(t), x=0.5),
             xaxis=dict(title='Aantal moties', tickformat='d'),
@@ -130,7 +130,7 @@ fig_corr = go.Figure(
             z=corr,
             x=parties,
             y=parties,
-            colorscale='tealrose'
+            colorscale=[[0, '#959CA5'], [0.5, 'white'], [1, '#121469']]
         )
     ),
     layout=go.Layout(
@@ -147,7 +147,7 @@ for i in proposers:
 # plot fig5
 fig_ps = go.Figure(
     data=[
-        go.Bar(x=ps_x, y=ps_y, marker_color='#82CDBD')],
+        go.Bar(x=ps_x, y=ps_y, marker_color='#121469')],
     layout=go.Layout(
         title=dict(text='Aantal voorstellen per partij', x=0.5),
         yaxis=dict(title='Aantal moties', gridcolor='#EEEEEE', zerolinecolor='#EEEEEE', tickformat='d'),
@@ -165,7 +165,7 @@ server = app.server
 app.layout = html.Div(children=[
     html.H1(children='Stemmen binnen de Tweede Kamer',
             style={'width': '99%', 'height': 30, 'fontSize': 20, 'color': '#FFFFFF',
-                   'paddingLeft': '1.5%', 'paddingTop': 5, 'backgroundColor': '#363880'}),
+                   'paddingLeft': '1.5%', 'paddingTop': 5, 'backgroundColor': '#121469'}),
 
     html.Div([
         dcc.Graph(id='fig_td', figure=fig_td)],
